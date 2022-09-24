@@ -7,12 +7,13 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface IxNFTLaunchPadDestination {
-    function deploy(
+      function deploy(
         string memory name,
         string memory symbol,
         string memory tokenURI,
-        uint256 price
-    ) external;
+        uint price,
+        address owner
+    ) external ;
 }
 
 contract xNFTLaunchPadSource {
@@ -78,7 +79,8 @@ contract xNFTLaunchPadSource {
             _name,
             _symbol,
             _tokenURI,
-            _salePrice
+            _salePrice,
+            msg.sender
         );
 
         for (uint8 i = 0; i < _chainIds.length; i++) {
@@ -91,7 +93,8 @@ contract xNFTLaunchPadSource {
                     _name,
                     _symbol,
                     _tokenURI,
-                    _salePrice
+                    _salePrice,
+                    msg.sender
                 );
             } else {
                 //define params as per connext
